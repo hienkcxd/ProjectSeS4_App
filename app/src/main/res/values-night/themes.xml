@@ -24,4 +24,8 @@
         <item name="android:background">@drawable/btn_background2</item>
         <item name="android:textColor">#ffffff</item>
     </style>
+    <style name="BUTTON_ACTIVE">
+        <item name="android:background">@drawable/btn_background1</item>
+        <item name="android:textColor">#ffd60a</item>
+    </style>
 </resources>
