@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/baseLayout"
+    style="@style/SCREEN"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:textAlignment="center"
@@ -202,12 +203,12 @@
         app:layout_constraintVertical_bias="0.262">
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/BUTTON"
             android:id="@+id/btnUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_background2"
             android:drawableTop="@drawable/upload_file_50"
             android:padding="5dp"
             android:text="upload"
@@ -217,12 +218,12 @@
             tools:layout_editor_absoluteY="655dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/BUTTON"
             android:id="@+id/btnLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_background2"
             android:drawableTop="@drawable/logout_50"
             android:padding="5dp"
             android:text="logout"
@@ -244,13 +245,13 @@
         tools:layout_editor_absoluteX="4dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/BUTTON"
             android:id="@+id/btnDarkMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:padding="5dp"
-            android:background="@drawable/btn_background2"
             android:drawableTop="@drawable/dark_mode_50"
             android:text="dark"
             android:textColor="@color/white"
@@ -259,13 +260,13 @@
             tools:layout_editor_absoluteY="655dp" />
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/BUTTON"
             android:id="@+id/btnLightMode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:padding="5dp"
-            android:background="@drawable/btn_background2"
             android:drawableTop="@drawable/light_mode_50"
             android:text="light"
             android:textColor="@color/white"
