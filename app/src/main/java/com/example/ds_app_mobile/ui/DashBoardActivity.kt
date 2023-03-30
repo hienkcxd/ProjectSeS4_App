@@ -2,6 +2,7 @@ package com.example.ds_app_mobile.ui
 
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
+import com.example.ds_app_mobile.AccountActivity
+import com.example.ds_app_mobile.MainActivity
 import com.example.ds_app_mobile.R
+import com.example.ds_app_mobile.UploadActivity
 import com.example.ds_app_mobile.databinding.ActivityDashBoardBinding
 import kotlin.math.log
 
@@ -53,6 +57,21 @@ class DashBoardActivity : AppCompatActivity() {
                 editor.putBoolean("night", false)
             }
             editor.apply()
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnUpload.setOnClickListener {
+            val intent = Intent(this, UploadActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnAccount.setOnClickListener {
+            val intent = Intent(this, AccountActivity::class.java)
+            startActivity(intent)
         }
     }
 }
