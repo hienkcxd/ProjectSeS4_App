@@ -29,6 +29,7 @@ class DashBoardActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE)
         nightMode = sharedPreferences.getBoolean("night", false)
         editor = sharedPreferences.edit()
+
         if(nightMode){
             binding.btnDarkMode.isEnabled = false
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
