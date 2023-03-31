@@ -1,4 +1,4 @@
-package com.example.ds_app_mobile
+package com.example.ds_app_mobile.ui
 
 import android.content.Context
 import android.content.SharedPreferences
