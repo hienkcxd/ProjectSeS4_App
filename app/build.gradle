@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -36,10 +37,11 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     def nav_version = "2.5.3"
     def lifecycle_version = "2.5.1"
     def arch_version = "2.1.0"
-
+    implementation 'com.google.firebase:firebase-storage:20.0.0'
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
     // LiveData
