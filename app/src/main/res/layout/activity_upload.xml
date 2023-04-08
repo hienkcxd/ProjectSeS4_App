@@ -1,43 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/SCREEN"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".ui.UploadActivity">
 
-    <Button
-        android:id="@+id/btnChoseFile"
-        android:layout_width="261dp"
-        android:layout_height="111dp"
-        android:text="Get File"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284" />
+    <EditText
+        android:id="@+id/edtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:hint="title video"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:layout_centerHorizontal="true"
+        />
+    <VideoView
+        android:id="@+id/viewVideo"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_below="@id/edtTitle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
 
-    <Button
+    />
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUpload"
-        android:layout_width="261dp"
-        android:layout_height="111dp"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:background="@drawable/btn_background1"
         android:text="Upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChoseFile"
-        app:layout_constraintVertical_bias="0.236" />
+        android:textSize="24sp"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_below="@id/viewVideo"
+    />
 
-    <ProgressBar
-        android:id="@+id/prgBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="200dp"
-        android:layout_height="226dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpload"
-        app:layout_constraintVertical_bias="0.431" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnChoseFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/video_50" />
+</RelativeLayout>
