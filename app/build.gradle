@@ -39,6 +39,8 @@ android {
 dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
     implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
+    implementation 'com.google.firebase:firebase-database:20.0.4'
+    implementation 'com.google.firebase:firebase-firestore:24.1.1'
     def nav_version = "2.5.3"
     def lifecycle_version = "2.5.1"
     def arch_version = "2.1.0"
