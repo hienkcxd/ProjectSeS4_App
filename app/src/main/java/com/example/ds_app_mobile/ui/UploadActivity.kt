@@ -23,6 +23,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.ds_app_mobile.databinding.ActivityUploadBinding
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.UploadTask.TaskSnapshot
 
 
 class UploadActivity : AppCompatActivity() {
@@ -82,7 +85,49 @@ class UploadActivity : AppCompatActivity() {
         progressDialog.show()
 
         ///time stamp
-        val timeStamp = System.currentTimeMillis()
+        val timeStamp = ""+System.currentTimeMillis()
+
+        //file path and name in firebase
+        val filePathAndName = "Videos/video_$timeStamp"
+        //storage reference
+        val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
+        //upload video using uri of video to storage
+        storageReference.putFile(videoUri!!).addOnSuccessListener {taskSnapshot ->
+            //uploaded
+            val uriTask = taskSnapshot.storage.downloadUrl
+            while (!uriTask.isSuccessful);
+            val downloadUrl = uriTask.result
+            if(uriTask.isSuccessful){
+                //url video is received successfully
+
+                //add video detail to firebase db
+                val hashMap = HashMap<String, Any>()
+                hashMap["id"] = "$timeStamp"
+                hashMap["title"] = "$title"
+                hashMap["timeStamp"] = "$timeStamp"
+                hashMap["videouri"] = "$downloadUrl"
+
+                //put the above info to db
+                val dbReference = FirebaseDatabase.getInstance().getReference("videos")
+                dbReference.child(timeStamp)
+                    .setValue(hashMap)
+                    .addOnSuccessListener {taskSnapshot ->
+                        //video info added successfully
+                        progressDialog.dismiss()
+                        Toast.makeText(this, "Video Uploaded", Toast.LENGTH_LONG).show()
+                    }
+                    .addOnFailureListener{e ->
+                        //failed adding video uri
+                        progressDialog.dismiss()
+                        Toast.makeText(this, "${e.message}", Toast.LENGTH_LONG).show()
+                    }
+            }
+        }
+            .addOnFailureListener{e ->
+                //failed
+                progressDialog.dismiss()
+                Toast.makeText(this, "${e.message}", Toast.LENGTH_LONG).show()
+            }
     }
 
     private fun setVideoToView(){
@@ -108,7 +153,7 @@ class UploadActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         //title
         builder.setTitle("Pick Video From").setItems(option){
-            dialogInterfaces, i ->
+                dialogInterfaces, i ->
             if(i == 0){
                 if(checkCameraPermission()){
                     requestCameraPermission()
