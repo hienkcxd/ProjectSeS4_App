@@ -63,6 +63,7 @@ class UploadActivity : AppCompatActivity() {
         progressDialog.setTitle("Please Wait")
         progressDialog.setMessage("Uploading video...")
         progressDialog.setCanceledOnTouchOutside(false)
+
         //handle button upload video
         binding.btnUpload.setOnClickListener {
             title = binding.edtTitle.text.toString().trim()
@@ -77,6 +78,7 @@ class UploadActivity : AppCompatActivity() {
         //handle button chose video
         binding.btnChoseFile.setOnClickListener {
             videoPickDialog()
+//            videoView.setVideoURI(videoUri)
         }
     }
 
@@ -88,7 +90,7 @@ class UploadActivity : AppCompatActivity() {
         val timeStamp = ""+System.currentTimeMillis()
 
         //file path and name in firebase
-        val filePathAndName = "Videos/video_$timeStamp"
+        val filePathAndName = "Videos/video_$title"
         //storage reference
         val storageReference = FirebaseStorage.getInstance().getReference(filePathAndName)
         //upload video using uri of video to storage
@@ -103,6 +105,7 @@ class UploadActivity : AppCompatActivity() {
                 //add video detail to firebase db
                 val hashMap = HashMap<String, Any>()
                 hashMap["id"] = "$timeStamp"
+                hashMap["user"] = "coop"
                 hashMap["title"] = "$title"
                 hashMap["timeStamp"] = "$timeStamp"
                 hashMap["videouri"] = "$downloadUrl"
@@ -141,8 +144,7 @@ class UploadActivity : AppCompatActivity() {
         videoView.setVideoURI(videoUri)
         videoView.requestFocus()
         videoView.setOnPreparedListener {
-            //when video ready, by default don't play automatic
-            videoView.pause()
+            videoView.start()
         }
     }
     private fun videoPickDialog(){
@@ -155,7 +157,7 @@ class UploadActivity : AppCompatActivity() {
         builder.setTitle("Pick Video From").setItems(option){
                 dialogInterfaces, i ->
             if(i == 0){
-                if(checkCameraPermission()){
+                if(!checkCameraPermission()){
                     requestCameraPermission()
                 }else{
                     pickVideoCamera()
@@ -167,6 +169,7 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun requestCameraPermission(){
+        cameraPermission = arrayOf(android.Manifest.permission.CAMERA)
         ActivityCompat.requestPermissions(
             this,
             cameraPermission,
@@ -219,8 +222,8 @@ class UploadActivity : AppCompatActivity() {
             CAMERA_REQUEST_CODE ->
                 if (grantResults.size>0){
                     val cameraAccept = grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    val storageAccept = grantResults[1] == PackageManager.PERMISSION_GRANTED
-                    if(cameraAccept&&storageAccept){
+//                    val storageAccept = grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    if(cameraAccept){
                         //both permission allowed
                         pickVideoCamera()
                     }else{
@@ -236,11 +239,11 @@ class UploadActivity : AppCompatActivity() {
         if(resultCode == RESULT_OK){
             if(requestCode == VIDEO_PICK_CAM_CODE){
                 //video picked from camera
-                videoUri = data!!.data
+                videoUri = data?.data
                 setVideoToView()
             }
             else if(requestCode == VIDEO_PICK_GALLERY_CODE){
-                videoUri = data!!.data
+                videoUri = data?.data
                 setVideoToView()
             }
         }else{
