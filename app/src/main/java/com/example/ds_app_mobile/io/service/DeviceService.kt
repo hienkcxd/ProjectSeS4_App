@@ -30,15 +30,16 @@ interface DeviceService {
 
 
     //lay ds file cua user
-    @POST(value = "user/file-storage")
+    @GET(value = "user/file-storage")
     fun getFileList(
         @Header("Authorization") token: String,
     ): Call<List<FileResponse>>
 
 
     companion object {
-        //        private const val BASE_URL = "http://192.168.1.128:8080/api/"
-        private const val BASE_URL ="http://172.16.1.170:8080/api/"
+//        private const val BASE_URL = "http://192.168.1.128:8080/api/"
+        private const val BASE_URL = "http://192.168.1.60:8080/api/"
+//        private const val BASE_URL ="http://172.16.1.170:8080/api/"
 
 
         fun create(authToken: String): DeviceService {

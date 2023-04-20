@@ -45,8 +45,8 @@ class DashBoardActivity : AppCompatActivity() {
         nightMode = sharedPreferences.getBoolean("night", false)
         editor = sharedPreferences.edit()
         lifecycleScope.launch {
-            quantityDeviceOfUser()
             quantityVideoOfUser()
+            quantityDeviceOfUser()
             quantityStoreOfUser()
             binding.txtDevice.text = deviceList.size.toString()
             binding.txtFile.text = fileList.size.toString()
